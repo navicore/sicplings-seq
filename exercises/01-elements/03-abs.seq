@@ -1,0 +1,44 @@
+# Exercise 1.1.3: Absolute Value
+#
+# SICP introduces conditionals with absolute value:
+#
+#   (define (abs x)
+#     (cond ((> x 0) x)
+#           ((= x 0) 0)
+#           ((< x 0) (- x))))
+#
+# Or more simply:
+#   (define (abs x)
+#     (if (< x 0) (- x) x))
+#
+# In Seq, we use `if ... then` or `if ... else ... then`:
+#
+#   condition if
+#       true-branch
+#   else
+#       false-branch
+#   then
+#
+# Your task: Implement abs
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: abs ( Int -- Int )
+    # Your code here
+    # Hint: 0 i.< tests if top of stack is negative
+    # Hint: 0 swap i.- negates a number (0 - n)
+    drop 0
+;
+
+: test-abs ( -- )
+    -5 abs
+    # Do not edit below this line
+    5 test.assert-eq
+
+    5 abs
+    5 test.assert-eq
+
+    0 abs
+    0 test.assert-eq
+;

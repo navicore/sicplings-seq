@@ -1,0 +1,35 @@
+# Exercise 1.1.2: Sum of Squares
+#
+# SICP's next example builds on square:
+#
+#   (define (sum-of-squares x y)
+#     (+ (square x) (square y)))
+#
+# This demonstrates COMPOSITION - building complex operations
+# from simpler ones. The beauty of Seq: composition is just
+# juxtaposition.
+#
+# Your task: Implement sum-of-squares
+# Stack effect: ( Int Int -- Int )
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: square ( Int -- Int )
+    dup i.*
+;
+
+: sum-of-squares ( Int Int -- Int )
+    # Your code here
+    # With two values on stack, how do you square each and add?
+    drop drop 0
+;
+
+: test-sum-of-squares ( -- )
+    3 4 sum-of-squares
+    # Do not edit below this line
+    25 test.assert-eq   # 9 + 16 = 25
+
+    5 12 sum-of-squares
+    169 test.assert-eq  # 25 + 144 = 169
+;

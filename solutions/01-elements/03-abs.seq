@@ -1,0 +1,16 @@
+: abs ( Int -- Int )
+    dup 0 i.< if
+        0 swap i.-    # negate: 0 - n
+    then
+;
+
+: test-abs ( -- )
+    -5 abs
+    5 test.assert-eq
+
+    5 abs
+    5 test.assert-eq
+
+    0 abs
+    0 test.assert-eq
+;

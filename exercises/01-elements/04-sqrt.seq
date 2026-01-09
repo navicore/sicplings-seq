@@ -1,0 +1,74 @@
+# Exercise 1.1.4: Square Root by Newton's Method (SICP 1.1.7)
+#
+# This is one of SICP's most important early exercises. It shows how
+# computation can be viewed as a process of successive approximation.
+#
+# Newton's method for square root:
+#   - Start with a guess
+#   - Improve the guess: new-guess = (guess + x/guess) / 2
+#   - Repeat until "good enough"
+#
+# In Scheme:
+#   (define (sqrt x)
+#     (sqrt-iter 1.0 x))
+#
+#   (define (sqrt-iter guess x)
+#     (if (good-enough? guess x)
+#         guess
+#         (sqrt-iter (improve guess x) x)))
+#
+# INSIGHT: This is ITERATIVE COMPUTATION expressed through recursion.
+# In Seq, we can express it more directly with a while loop.
+#
+# For floating point, use: f.+, f.-, f.*, f./, f.<
+#
+# Your task: Implement sqrt using Newton's method
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: improve ( guess x -- improved-guess )
+    # new-guess = (guess + x/guess) / 2
+    # Stack: ( guess x )
+    # Your code here
+    drop
+;
+
+: good-enough? ( guess x -- Bool )
+    # Is |guess^2 - x| < 0.001?
+    # Stack: ( guess x )
+    # Your code here
+    drop drop true
+;
+
+: sqrt-iter ( guess x -- result )
+    # Keep improving until good enough
+    # Your code here - use recursion or a while loop
+    drop
+;
+
+: sqrt ( Float -- Float )
+    # Start with guess = 1.0
+    1.0 swap sqrt-iter
+;
+
+: f-abs ( Float -- Float )
+    dup 0.0 f.< if 0.0 swap f.- then
+;
+
+: approx-eq ( Float Float -- Bool )
+    f.- f-abs 0.01 f.<
+;
+
+: test-sqrt ( -- )
+    # sqrt(4) should be approximately 2
+    4.0 sqrt 2.0 approx-eq
+    # Do not edit below this line
+    if 1 else 0 then
+    1 test.assert-eq
+
+    # sqrt(9) should be approximately 3
+    9.0 sqrt 3.0 approx-eq
+    if 1 else 0 then
+    1 test.assert-eq
+;

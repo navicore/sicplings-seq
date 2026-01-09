@@ -1,0 +1,55 @@
+: f-abs ( Float -- Float )
+    dup 0.0 f.< if 0.0 swap f.- then
+;
+
+: improve ( Float Float -- Float )
+    # new = (guess + x/guess) / 2
+    over f./       # x/guess
+    swap f.+       # guess + x/guess
+    2.0 f./        # (guess + x/guess) / 2
+;
+
+: good-enough? ( Float Float -- Bool )
+    # Is |guess^2 - x| < 0.001?
+    over dup f.*   # guess^2
+    swap f.-       # guess^2 - x
+    f-abs          # |guess^2 - x|
+    0.001 f.<      # < 0.001?
+    nip            # clean stack
+;
+
+: sqrt ( Float -- Float )
+    1.0 swap    # ( guess x )
+    [
+        2dup good-enough? not
+    ]
+    [
+        2dup improve    # ( guess x improved )
+        rot drop        # ( x improved )
+        swap            # ( improved x )
+    ]
+    while
+    drop    # ( result )
+;
+
+: approx-eq ( Float Float -- Bool )
+    # Check if two floats are approximately equal (within 0.01)
+    f.- f-abs 0.01 f.<
+;
+
+: test-sqrt ( -- )
+    # sqrt(4) should be approximately 2
+    4.0 sqrt 2.0 approx-eq
+    if 1 else 0 then
+    1 test.assert-eq
+
+    # sqrt(9) should be approximately 3
+    9.0 sqrt 3.0 approx-eq
+    if 1 else 0 then
+    1 test.assert-eq
+
+    # sqrt(2) squared should be approximately 2
+    2.0 sqrt dup f.* 2.0 approx-eq
+    if 1 else 0 then
+    1 test.assert-eq
+;

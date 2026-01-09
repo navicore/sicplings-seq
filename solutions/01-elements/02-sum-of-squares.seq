@@ -1,0 +1,19 @@
+: square ( Int -- Int )
+    dup i.*
+;
+
+: sum-of-squares ( Int Int -- Int )
+    # Stack: ( x y )
+    square      # ( x y^2 )
+    swap        # ( y^2 x )
+    square      # ( y^2 x^2 )
+    i.+         # ( y^2+x^2 )
+;
+
+: test-sum-of-squares ( -- )
+    3 4 sum-of-squares
+    25 test.assert-eq
+
+    5 12 sum-of-squares
+    169 test.assert-eq
+;

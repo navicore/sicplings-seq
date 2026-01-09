@@ -1,0 +1,34 @@
+# Exercise 1.1.1: Square
+#
+# SICP begins with the simplest compound procedure:
+#
+#   (define (square x) (* x x))
+#
+# In Seq, we define words with `: name ( stack-effect ) ... ;`
+#
+# The stack effect ( Int -- Int ) means:
+#   - Takes one Int from the stack
+#   - Leaves one Int on the stack
+#
+# Your task: Implement square using dup and i.*
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: square ( Int -- Int )
+    # Your code here
+    # Hint: dup duplicates the top of stack
+    drop 0
+;
+
+: test-square ( -- )
+    5 square
+    # Do not edit below this line
+    25 test.assert-eq
+
+    3 square
+    9 test.assert-eq
+
+    -4 square
+    16 test.assert-eq
+;

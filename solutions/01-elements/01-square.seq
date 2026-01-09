@@ -1,0 +1,14 @@
+: square ( Int -- Int )
+    dup i.*
+;
+
+: test-square ( -- )
+    5 square
+    25 test.assert-eq
+
+    3 square
+    9 test.assert-eq
+
+    -4 square
+    16 test.assert-eq
+;
