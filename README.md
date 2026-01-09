@@ -2,6 +2,8 @@
 
 **Structure and Interpretation of Computer Programs** - reimagined in a stack-based language.
 
+> **New to Seq?** Learn the language first with [seqlings](https://github.com/navicore/seqlings) - interactive exercises that teach stack-based programming from the ground up. Come back here once you're comfortable with words, stack effects, and quotations.
+
 This is an experimental project to work through SICP exercises using [Seq](https://github.com/navicore/patch-seq), a concatenative stack-based language. The goal is twofold:
 
 1. **Learn SICP's deep ideas** about computation, abstraction, and interpretation
