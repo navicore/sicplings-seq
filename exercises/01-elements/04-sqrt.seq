@@ -27,22 +27,23 @@
 
 # I AM NOT DONE
 
-: improve ( guess x -- improved-guess )
+: improve ( Float Float -- Float )
     # new-guess = (guess + x/guess) / 2
     # Stack: ( guess x )
     # Your code here
     drop
 ;
 
-: good-enough? ( guess x -- Bool )
+: good-enough? ( Float Float -- Bool )
     # Is |guess^2 - x| < 0.001?
     # Stack: ( guess x )
     # Your code here
     drop drop true
 ;
 
-: sqrt-iter ( guess x -- result )
+: sqrt-iter ( Float Float -- Float )
     # Keep improving until good enough
+    # Stack: ( guess x )
     # Your code here - use recursion or a while loop
     drop
 ;
