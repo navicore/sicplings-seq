@@ -1,0 +1,55 @@
+# Exercise 1.2.2a: Fibonacci (Tree Recursion)
+#
+# The Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+#
+#   Fib(0) = 0
+#   Fib(1) = 1
+#   Fib(n) = Fib(n-1) + Fib(n-2)
+#
+# In Scheme:
+#   (define (fib n)
+#     (cond ((= n 0) 0)
+#           ((= n 1) 1)
+#           (else (+ (fib (- n 1))
+#                    (fib (- n 2))))))
+#
+# This generates a TREE RECURSIVE PROCESS:
+#
+#                     fib(5)
+#                    /      \
+#               fib(4)      fib(3)
+#              /     \      /     \
+#          fib(3)  fib(2) fib(2) fib(1)
+#          /    \    ...    ...
+#       fib(2) fib(1)
+#         ...
+#
+# The number of steps grows EXPONENTIALLY - O(φⁿ) where φ ≈ 1.618
+# This is terribly inefficient, but beautifully matches the definition.
+#
+# Your task: Implement fib recursively (the naive way)
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: fib ( Int -- Int )
+    # Base cases: fib(0)=0, fib(1)=1
+    # Recursive case: fib(n) = fib(n-1) + fib(n-2)
+    # Your code here
+    drop 0
+;
+
+: test-fib ( -- )
+    0 fib
+    # Do not edit below this line
+    0 test.assert-eq
+
+    1 fib
+    1 test.assert-eq
+
+    5 fib
+    5 test.assert-eq
+
+    10 fib
+    55 test.assert-eq
+;

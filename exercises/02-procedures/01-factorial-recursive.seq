@@ -1,0 +1,49 @@
+# Exercise 1.2.1a: Factorial (Recursive)
+#
+# The classic recursive definition:
+#
+#   n! = n × (n-1)!
+#   1! = 1
+#
+# In Scheme:
+#   (define (factorial n)
+#     (if (= n 1)
+#         1
+#         (* n (factorial (- n 1)))))
+#
+# This generates a LINEAR RECURSIVE PROCESS - the interpreter
+# must keep track of the deferred multiplications:
+#
+#   (factorial 6)
+#   (* 6 (factorial 5))
+#   (* 6 (* 5 (factorial 4)))
+#   (* 6 (* 5 (* 4 (factorial 3))))
+#   (* 6 (* 5 (* 4 (* 3 (factorial 2)))))
+#   (* 6 (* 5 (* 4 (* 3 (* 2 (factorial 1))))))
+#   (* 6 (* 5 (* 4 (* 3 (* 2 1)))))
+#   (* 6 (* 5 (* 4 (* 3 2))))
+#   ... and so on
+#
+# Your task: Implement factorial recursively
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: factorial ( Int -- Int )
+    # Base case: 1! = 1
+    # Recursive case: n! = n * (n-1)!
+    # Your code here
+    drop 1
+;
+
+: test-factorial ( -- )
+    1 factorial
+    # Do not edit below this line
+    1 test.assert-eq
+
+    5 factorial
+    120 test.assert-eq
+
+    6 factorial
+    720 test.assert-eq
+;

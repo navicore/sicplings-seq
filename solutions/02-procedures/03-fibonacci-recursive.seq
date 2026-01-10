@@ -1,0 +1,27 @@
+: fib ( Int -- Int )
+    dup 0 i.= if
+        drop 0
+    else
+        dup 1 i.= if
+            drop 1
+        else
+            dup 1 i.- fib
+            swap 2 i.- fib
+            i.+
+        then
+    then
+;
+
+: test-fib ( -- )
+    0 fib
+    0 test.assert-eq
+
+    1 fib
+    1 test.assert-eq
+
+    5 fib
+    5 test.assert-eq
+
+    10 fib
+    55 test.assert-eq
+;

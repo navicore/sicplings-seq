@@ -1,0 +1,26 @@
+: gcd ( Int Int -- Int )
+    # Stack: ( a b )
+    dup 0 i.= if
+        drop
+    else
+        tuck i.%   # ( b a%b )
+        gcd
+    then
+;
+
+: test-gcd ( -- )
+    48 18 gcd
+    6 test.assert-eq
+
+    206 40 gcd
+    2 test.assert-eq
+
+    54 24 gcd
+    6 test.assert-eq
+
+    17 13 gcd
+    1 test.assert-eq
+
+    100 100 gcd
+    100 test.assert-eq
+;

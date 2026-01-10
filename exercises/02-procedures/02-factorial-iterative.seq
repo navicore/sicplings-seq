@@ -1,0 +1,58 @@
+# Exercise 1.2.1b: Factorial (Iterative)
+#
+# The same computation, but as an ITERATIVE PROCESS:
+#
+# In Scheme:
+#   (define (factorial n)
+#     (fact-iter 1 1 n))
+#
+#   (define (fact-iter product counter max-count)
+#     (if (> counter max-count)
+#         product
+#         (fact-iter (* counter product)
+#                    (+ counter 1)
+#                    max-count)))
+#
+# This maintains STATE in the arguments:
+#   - product: accumulated result so far
+#   - counter: current number to multiply
+#   - max-count: target
+#
+# The process is ITERATIVE - constant space, no deferred operations.
+#
+# In Seq, we can use a while loop or tail recursion.
+# The stack naturally holds our state!
+#
+# Your task: Implement factorial iteratively
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: fact-iter ( Int Int Int -- Int )
+    # Stack: ( product counter max-count )
+    # If counter > max-count, return product
+    # Else: fact-iter(product*counter, counter+1, max-count)
+    # Your code here
+    drop drop
+;
+
+: factorial ( Int -- Int )
+    # Start with product=1, counter=1
+    # (factorial n) = (fact-iter 1 1 n)
+    1 1 rot fact-iter
+;
+
+: test-factorial ( -- )
+    1 factorial
+    # Do not edit below this line
+    1 test.assert-eq
+
+    5 factorial
+    120 test.assert-eq
+
+    6 factorial
+    720 test.assert-eq
+
+    10 factorial
+    3628800 test.assert-eq
+;

@@ -1,0 +1,65 @@
+# Exercise 1.2.4: Exponentiation
+#
+# Computing b^n (b to the power n).
+#
+# Naive approach - O(n):
+#   b^n = b × b^(n-1)
+#   b^0 = 1
+#
+# But we can do better! Fast exponentiation - O(log n):
+#   b^n = (b^(n/2))²     if n is even
+#   b^n = b × b^(n-1)    if n is odd
+#   b^0 = 1
+#
+# In Scheme:
+#   (define (fast-expt b n)
+#     (cond ((= n 0) 1)
+#           ((even? n) (square (fast-expt b (/ n 2))))
+#           (else (* b (fast-expt b (- n 1))))))
+#
+# Example: 2^10
+#   2^10 = (2^5)²
+#   2^5 = 2 × 2^4
+#   2^4 = (2^2)²
+#   2^2 = (2^1)²
+#   2^1 = 2 × 2^0
+#   2^0 = 1
+#
+# Only 5 multiplications instead of 10!
+#
+# Your task: Implement fast exponentiation
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: even? ( Int -- Bool )
+    2 i.% 0 i.=
+;
+
+: square ( Int -- Int )
+    dup i.*
+;
+
+: fast-expt ( Int Int -- Int )
+    # Stack: ( b n )
+    # If n=0, return 1
+    # If n is even: square(fast-expt(b, n/2))
+    # If n is odd: b * fast-expt(b, n-1)
+    # Your code here
+    drop drop 1
+;
+
+: test-expt ( -- )
+    2 0 fast-expt
+    # Do not edit below this line
+    1 test.assert-eq
+
+    2 10 fast-expt
+    1024 test.assert-eq
+
+    3 5 fast-expt
+    243 test.assert-eq
+
+    7 4 fast-expt
+    2401 test.assert-eq
+;

@@ -1,0 +1,38 @@
+: fib-iter ( Int Int Int -- Int )
+    # Stack: ( a b count )
+    # SICP: (fib-iter (+ a b) a (- count 1))
+    dup 0 i.= if
+        # count=0, return b
+        drop nip
+    else
+        # Transform ( a b count ) -> ( a+b a count-1 )
+        1 i.-            # ( a b count-1 )
+        rot rot          # ( count-1 a b )
+        over             # ( count-1 a b a )
+        i.+              # ( count-1 a a+b )
+        swap             # ( count-1 a+b a )
+        rot              # ( a+b a count-1 )
+        fib-iter
+    then
+;
+
+: fib ( Int -- Int )
+    1 0 rot fib-iter
+;
+
+: test-fib ( -- )
+    0 fib
+    0 test.assert-eq
+
+    1 fib
+    1 test.assert-eq
+
+    10 fib
+    55 test.assert-eq
+
+    20 fib
+    6765 test.assert-eq
+
+    30 fib
+    832040 test.assert-eq
+;

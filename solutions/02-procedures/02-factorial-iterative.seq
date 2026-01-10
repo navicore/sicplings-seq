@@ -1,0 +1,33 @@
+: fact-iter ( Int Int Int -- Int )
+    # Stack: ( product counter max-count )
+    2dup i.> if
+        # counter > max-count, return product
+        drop drop
+    else
+        # Compute: fact-iter(product*counter, counter+1, max-count)
+        rot rot          # ( max-count product counter )
+        tuck i.*         # ( max-count counter product*counter )
+        swap             # ( max-count product*counter counter )
+        1 i.+            # ( max-count product*counter counter+1 )
+        rot              # ( product*counter counter+1 max-count )
+        fact-iter
+    then
+;
+
+: factorial ( Int -- Int )
+    1 1 rot fact-iter
+;
+
+: test-factorial ( -- )
+    1 factorial
+    1 test.assert-eq
+
+    5 factorial
+    120 test.assert-eq
+
+    6 factorial
+    720 test.assert-eq
+
+    10 factorial
+    3628800 test.assert-eq
+;

@@ -1,0 +1,63 @@
+# Exercise 1.2.2b: Fibonacci (Iterative)
+#
+# The tree-recursive Fibonacci is elegant but exponentially slow.
+# We can compute it in LINEAR time by maintaining state:
+#
+# In Scheme:
+#   (define (fib n)
+#     (fib-iter 1 0 n))
+#
+#   (define (fib-iter a b count)
+#     (if (= count 0)
+#         b
+#         (fib-iter (+ a b) a (- count 1))))
+#
+# State transformation:
+#   a, b → a+b, a
+#
+# Starting from a=1, b=0:
+#   count=5: a=1, b=0
+#   count=4: a=1, b=1
+#   count=3: a=2, b=1
+#   count=2: a=3, b=2
+#   count=1: a=5, b=3
+#   count=0: return b=5
+#
+# This is O(n) - linear time, constant space!
+#
+# Your task: Implement fib iteratively
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: fib-iter ( Int Int Int -- Int )
+    # Stack: ( a b count )
+    # If count=0, return b
+    # Else: fib-iter(a+b, a, count-1)
+    # Your code here
+    drop drop
+;
+
+: fib ( Int -- Int )
+    # (fib n) = (fib-iter 1 0 n)
+    1 0 rot fib-iter
+;
+
+: test-fib ( -- )
+    0 fib
+    # Do not edit below this line
+    0 test.assert-eq
+
+    1 fib
+    1 test.assert-eq
+
+    10 fib
+    55 test.assert-eq
+
+    20 fib
+    6765 test.assert-eq
+
+    # This would be impossibly slow with tree recursion!
+    30 fib
+    832040 test.assert-eq
+;

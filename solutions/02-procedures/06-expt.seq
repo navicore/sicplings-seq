@@ -1,0 +1,41 @@
+: even? ( Int -- Bool )
+    2 i.% 0 i.=
+;
+
+: square ( Int -- Int )
+    dup i.*
+;
+
+: fast-expt ( Int Int -- Int )
+    # Stack: ( b n )
+    dup 0 i.= if
+        drop drop 1
+    else
+        dup even? if
+            # (square (fast-expt b (/ n 2)))
+            2 i./           # ( b n/2 )
+            fast-expt       # ( b^(n/2) )
+            square          # ( (b^(n/2))^2 )
+        else
+            # (* b (fast-expt b (- n 1)))
+            1 i.-           # ( b n-1 )
+            over swap       # ( b b n-1 )
+            fast-expt       # ( b b^(n-1) )
+            i.*             # ( b * b^(n-1) )
+        then
+    then
+;
+
+: test-expt ( -- )
+    2 0 fast-expt
+    1 test.assert-eq
+
+    2 10 fast-expt
+    1024 test.assert-eq
+
+    3 5 fast-expt
+    243 test.assert-eq
+
+    7 4 fast-expt
+    2401 test.assert-eq
+;

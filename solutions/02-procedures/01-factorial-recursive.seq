@@ -1,0 +1,18 @@
+: factorial ( Int -- Int )
+    dup 1 i.<= if
+        drop 1
+    else
+        dup 1 i.- factorial i.*
+    then
+;
+
+: test-factorial ( -- )
+    1 factorial
+    1 test.assert-eq
+
+    5 factorial
+    120 test.assert-eq
+
+    6 factorial
+    720 test.assert-eq
+;

@@ -1,0 +1,57 @@
+# Exercise 1.2.5: Greatest Common Divisor
+#
+# Euclid's algorithm - one of the oldest known algorithms!
+#
+# The idea: GCD(a, b) = GCD(b, a mod b)
+#
+# In Scheme:
+#   (define (gcd a b)
+#     (if (= b 0)
+#         a
+#         (gcd b (remainder a b))))
+#
+# Example: GCD(206, 40)
+#   GCD(206, 40)
+#   GCD(40, 6)      # 206 = 40*5 + 6
+#   GCD(6, 4)       # 40 = 6*6 + 4
+#   GCD(4, 2)       # 6 = 4*1 + 2
+#   GCD(2, 0)       # 4 = 2*2 + 0
+#   → 2
+#
+# This generates an ITERATIVE PROCESS (even though it looks recursive).
+# The number of steps grows as O(log n) - very efficient!
+#
+# Lamé's Theorem: The number of steps is never more than 5 times
+# the number of digits in the smaller number.
+#
+# Your task: Implement GCD using Euclid's algorithm
+# When done, delete the marker line below.
+
+# I AM NOT DONE
+
+: gcd ( Int Int -- Int )
+    # Stack: ( a b )
+    # If b=0, return a
+    # Else: gcd(b, a mod b)
+    # Hint: i.% computes remainder
+    # Your code here
+    drop
+;
+
+: test-gcd ( -- )
+    48 18 gcd
+    # Do not edit below this line
+    6 test.assert-eq
+
+    206 40 gcd
+    2 test.assert-eq
+
+    54 24 gcd
+    6 test.assert-eq
+
+    17 13 gcd
+    1 test.assert-eq    # coprime
+
+    100 100 gcd
+    100 test.assert-eq  # same number
+;
