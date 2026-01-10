@@ -18,18 +18,24 @@
     nip            # clean stack
 ;
 
-: sqrt ( Float -- Float )
-    1.0 swap    # ( guess x )
-    [
-        2dup good-enough? not
-    ]
-    [
+: sqrt-iter ( Float Float -- Float )
+    # Stack: ( guess x )
+    # (if (good-enough? guess x)
+    #     guess
+    #     (sqrt-iter (improve guess x) x))
+    2dup good-enough? if
+        drop
+    else
         2dup improve    # ( guess x improved )
         rot drop        # ( x improved )
         swap            # ( improved x )
-    ]
-    while
-    drop    # ( result )
+        sqrt-iter
+    then
+;
+
+: sqrt ( Float -- Float )
+    # (define (sqrt x) (sqrt-iter 1.0 x))
+    1.0 swap sqrt-iter
 ;
 
 : approx-eq ( Float Float -- Bool )

@@ -48,13 +48,14 @@
     drop
 ;
 
-: sqrt ( Float -- Float )
-    # Start with guess = 1.0
-    1.0 swap sqrt-iter
-;
-
 : f-abs ( Float -- Float )
     dup 0.0 f.< if 0.0 swap f.- then
+;
+
+: sqrt ( Float -- Float )
+    # Start with guess = 1.0, then iterate
+    # (define (sqrt x) (sqrt-iter 1.0 x))
+    1.0 swap sqrt-iter
 ;
 
 : approx-eq ( Float Float -- Bool )
